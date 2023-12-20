@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.png">
+  <title>Scale Builder</title>
+  <script src="assets/alpine.min.js" defer></script>
+  <script src="assets/spectral.min.js"></script>
+  <script src="assets/chroma.min.js"></script>
+  <script src="assets/colorblind.js"></script>
+  <script src="assets/app.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/app.css">
+</head>
+
+<body x-data="g">
+  <section class="section">
+    <div class="container">
+      <figure class="image is-128x128">
+        <img src="assets/favicon.png">
+      </figure>
+      <h1 class="title is-1">Color scales builder</h1>
+      <div class="block">
+        This minimal tool helps you build a rightful color scale to be used in data visualizations. Just choose the type of scale, the number of steps, the target background and play with the starting and ending colors, everything else is already managed. You can choose between three perceptual color spaces to perform the internal calculations:
+      </div>
+      <div class="block">
+        <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Kubelka%E2%80%93Munk_theory" target="_blank">Spectral</a> (not exactly a color space)</li>
+          <li><a href="https://en.wikipedia.org/wiki/CIELAB_color_space" target="_blank">CIE L*a*b*</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/HCL_color_space" target="_blank">HCL</a></li>
+        </ul>
+      </div>
+      <div class="block">
+        Check the tooltips for relevant information when something turns red... 
+      </div>
+
+      <div class="box">
+
+        <div class="columns">
+
+          <div class="column">
+            <div class="field">
+              <div class="label is-normal">
+                <label class="label">Type</label>
+              </div>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="type" value="sequential" x-model="type">
+                  Sequential
+                </label>
+                <label class="radio">
+                  <input type="radio" name="type" x-model="type" value="divergent">
+                  Divergent
+                </label>
+                <label class="radio">
+                  <input type="radio" name="type" x-model="type" value="outliers">
+                  Outliers
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <div class="label is-normal">
+                <label class="label">Mode</label>
+              </div>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="mode" value="spectral" x-model="mode">
+                  Spectral
+                </label>
+                <label class="radio">
+                  <input type="radio" name="mode" value="lab" x-model="mode">
+                  CIE L*a*b*
+                </label>
+                <label class="radio">
+                  <input type="radio" name="mode" value="hcl" x-model="mode">
+                  HCL
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <div class="label is-normal">
+                <label class="label">Stops</label>
+              </div>
+              <div class="control">
+                <div class="select">
+                  <select x-model="steps">
+                    <option>5</option>
+                    <option>7</option>
+                    <option>9</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <div class="label is-normal">
+                <label class="label">Target Background</label>
+              </div>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="bg" value="light" x-model="bg">
+                  Light
+                </label>
+                <label class="radio">
+                  <input type="radio" name="bg" value="dark" x-model="bg">
+                  Dark
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <div class="label is-normal">
+                <label class="label">Color blindness check</label>
+              </div>
+              <div class="control">
+                <div class="select">
+                  <select x-model="colormode">
+                    <option value="-">-</option>
+                    <option value="protanopia">Protanopia (no red)</option>
+                    <option value="deuteranopia">Deuteranopia (no green)</option>
+                    <option value="tritanopia">Tritanopia (no blue)</option>
+                    <option value="achromatopsia">Achromatopsia (no color)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+     
+      <div class="box">
+        <div class="field is-grouped is-horizontal">
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Start</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input class="input" type="text" placeholder="Starting color" x-model="start">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <input type="color" x-model="start"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">End</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input class="input" type="text" placeholder="End color" x-model="end">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <input type="color" x-model="end"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="box last" x-bind:style="$store.colors.bg=='dark' && { 'background-color': '#333344' }">
+        <div class="is-flex is-flex-direction-column">
+          <div class="is-flex is-align-items-stretch pal">
+            <template x-for="(d, i) in $store.colors.pal">
+              <div class="is-flex-grow-5" x-bind:style="'background-color:' + d" x-bind:title="d"></div>
+            </template>
+          </div>
+          <div class="is-flex is-align-items-flex-end pal" title="Lightness">
+            <template x-for="(d, i) in $store.colors.lights">
+              <div class="is-flex-grow-5" :class="$store.colors.bg=='dark' ? 'lgdark' : 'lglight'" x-bind:style="'height:' + d + '%'"></div>
+            </template>
+          </div>
+          <div class="is-flex is-align-items-flex-end ds">
+            <template x-for="(d, i) in $store.colors.deltae">
+              <div class="is-flex-grow-5 deltas" x-text="d" :class="$store.colors.bg=='dark' ? 'lighttext' : ''" x-bind:title="(d < 2.3 || d > 49) ? 'The color separation is out of bounds' : 'Color separation within bounds'" x-bind:style="(d < 2.3 || d > 49) && { 'font-weight': 'bold', color: 'red' }" ></div>
+            </template>
+          </div>
+        </div>
+        <div class="control results">
+          <input class="input" x-bind:title="($store.colors.monotony > 2.3) ? ($store.colors.monotony < 4.6) ? 'This scale is quite uniform' : 'This scale is not uniform: The stddev of correlative colors distances (' + $store.colors.monotony.toFixed(2) +') is above the JND (2.3)' : 'This scale is uniform'" 
+          type="text" x-model="$store.colors.pal" x-bind:style="($store.colors.monotony > 4.6) && {'background-color' : '#fadbde'}" readonly>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="content has-text-centered">
+          Made with <span style="color:red;font-size: larger;">♥</span> by <a href="https://abelvm.github.io/" target="_blank">Abel Vázquez Montoro</a>
+        </div>
+      </footer>
+    </div>
+  </section>
+</body>
+
+</html>

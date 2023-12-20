@@ -1,0 +1,30 @@
+.pal{
+    height:100px;
+    margin: 0px 0px 30px 0px;
+}
+
+.lglight{
+    border-top: solid 1px #ccc;
+    background-color: #eee;
+}
+
+.lgdark{
+    border-top: solid 1px #666;
+    background-color: #444455;
+}
+
+.deltas{
+    text-align: center;
+}
+
+.lighttext {
+    color: #ffffff;
+}
+
+.results{
+    margin: 50px 0px 0px 0px;
+}
+
+.last{
+    padding: 100px 100px 40px 100px;
+}
