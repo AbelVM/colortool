@@ -28,3 +28,9 @@
 .last{
     padding: 100px 100px 40px 100px;
 }
+
+.radio {
+    display: block;
+    align-items: center;
+    margin-left: 0.5em;
+  }
