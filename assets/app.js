@@ -4,7 +4,7 @@
 
 const defaults = {
     "type":'sequential',
-    "mode": 'spectral',
+    "mode": 'oklab',
     "steps":7,
     "bg":'light',
     "colormode": '-',

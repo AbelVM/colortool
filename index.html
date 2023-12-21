@@ -32,7 +32,9 @@
           <li><a href="https://en.wikipedia.org/wiki/Kubelka%E2%80%93Munk_theory" target="_blank">Spectral</a> (not exactly a color space)</li>
           <li><a href="https://en.wikipedia.org/wiki/CIELAB_color_space" target="_blank">CIE L*a*b*</a></li>
           <li><a href="https://bottosson.github.io/posts/oklab/" target="_blank">Oklab</a></li>
-          <li><a href="https://en.wikipedia.org/wiki/HCL_color_space" target="_blank">HCL</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/HCL_color_space" target="_blank">LCH</a></li>
+          <li>Oklch (polar form of Oklab)</li>
+          <li><a href="https://en.wikipedia.org/wiki/HSL_and_HSV" target="_blank">HSL</a></li>
         </ul>
       </div>
       <div class="block">
@@ -84,8 +86,16 @@
                   Oklab
                 </label>
                 <label class="radio">
-                  <input type="radio" name="mode" value="hcl" x-model="mode">
-                  HCL
+                  <input type="radio" name="mode" value="lch" x-model="mode">
+                  LCH
+                </label>
+                <label class="radio">
+                  <input type="radio" name="mode" value="oklch" x-model="mode">
+                  Oklch
+                </label>
+                <label class="radio">
+                  <input type="radio" name="mode" value="hsl" x-model="mode">
+                  HSL
                 </label>
               </div>
             </div>
