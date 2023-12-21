@@ -196,7 +196,7 @@
               <div class="is-flex-grow-5" :class="$store.colors.bg=='dark' ? 'lgdark' : 'lglight'" x-bind:style="'height:' + d + '%'"></div>
             </template>
           </div>
-          <div class="is-flex is-align-items-flex-end ds">
+          <div class="is-flex is-align-items-flex-end ds" :style="'padding: 0px ' + (50 /  $store.colors.steps) +'% 0px ' + (50 /  $store.colors.steps) + '%'">
             <template x-for="(d, i) in $store.colors.deltae">
               <div class="is-flex-grow-5 deltas" x-text="d" :class="$store.colors.bg=='dark' ? 'lighttext' : ''" x-bind:title="(d < 2.3 || d > 49) ? 'The color separation is out of bounds' : 'Color separation within bounds'" x-bind:style="(d < 2.3 || d > 49) && { 'font-weight': 'bold', color: 'red' }" ></div>
             </template>
