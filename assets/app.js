@@ -39,10 +39,19 @@ document.addEventListener('alpine:init', () => {
                 },
                 colorblindness = (color, blindness) => {
                     const
-                        c = chroma(color).rgb(),
+                        ch = chroma(color),
+                        c = ch.rgb(),
                         co = { r: c[0], g: c[1], b: c[2] };
                     if (blindness === '-'){
                         return color;
+                    }
+                    else if (blindness === 'dog'){
+                        const 
+                            l = ch.oklab()[0],
+                            rg = 0.5 * (co.g + co.r),
+                            b = co.b,
+                            cd1 = chroma(rg, rg, b).oklab();
+                            return chroma.oklab(l,cd1[1],cd1[2]).hex();
                     }else{
                         const cb = colorblind.simulate(co, blindness);
                         return chroma(`rgb(${cb.r},${cb.g},${cb.b})`).hex();
